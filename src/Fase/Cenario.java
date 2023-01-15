@@ -1,5 +1,6 @@
 package Fase;
 import Players.Personagens;
+import Players.Vilao;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,8 @@ import java.awt.event.KeyEvent;
 public class Cenario extends JPanel implements ActionListener {
     private Image fundo;
     private Personagens player;
+
+    private Vilao vilao;
 
     private Timer timer;
 
@@ -24,6 +27,12 @@ public class Cenario extends JPanel implements ActionListener {
         player = new Personagens();
         player.load("assets\\personagem.png");
 
+        vilao = new Vilao();
+        vilao.load("assets\\vilao.png");
+        vilao.setX(700);
+        vilao.setY(230);
+
+
         addKeyListener(new TecladoAdapter());
 
         timer = new Timer(5, this);
@@ -35,6 +44,7 @@ public class Cenario extends JPanel implements ActionListener {
         //pintando imagem na tela e sua posição
         graficos.drawImage(fundo, 0, 0, null);
         graficos.drawImage(player.getImagem(), player.getX(), player.getY(), this);
+        graficos.drawImage(vilao.getImagem(), vilao.getX(), vilao.getY(), this);
         g.dispose();
     }
 
@@ -55,4 +65,6 @@ public class Cenario extends JPanel implements ActionListener {
             player.keyRelease(e);
         }
     }
+
+
 }
