@@ -1,6 +1,6 @@
 package Fase;
-import Players.Personagens;
-import Players.Vilao;
+
+import Players.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +32,10 @@ public class Cenario extends JPanel implements ActionListener {
         vilao.setX(700);
         vilao.setY(230);
 
+        if (colisao(player, vilao) == true) {
+            player.parou();
+        }
+
 
         addKeyListener(new TecladoAdapter());
 
@@ -54,7 +58,7 @@ public class Cenario extends JPanel implements ActionListener {
         repaint();
     }
 
-    private class TecladoAdapter extends KeyAdapter implements Fase.TecladoAdapter {
+    private class TecladoAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e){
             player.keyPressed(e);
@@ -66,5 +70,32 @@ public class Cenario extends JPanel implements ActionListener {
         }
     }
 
+    public boolean colisao(Personagens a, Vilao b){
+        int ax = a.getX();
+        int ladoDireitoA = ax + a.getLargura();
+        int ladoEsquerdoA = ax;
+
+        int bx = b.getX();
+        int ladoDireitoB = bx + b.getLargura();
+        int ladoEsquerdoB = bx;
+
+
+        boolean bateu = false;
+
+        boolean cDireita = false;
+        boolean cEsquerda = false;
+
+        if (ladoDireitoA >= ladoEsquerdoB){
+            cDireita = true;
+        }
+        if (ladoEsquerdoA >= ladoDireitoB){
+            cEsquerda = true;
+        }
+        if (cDireita == true || cEsquerda == true){
+            bateu = true;
+        }
+
+        return bateu;
+    }
 
 }

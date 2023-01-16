@@ -2,9 +2,6 @@ package Players;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 public class Vilao {
     private int x;
@@ -45,8 +42,24 @@ public class Vilao {
         imagem = referencia.getImage();
         altura = imagem.getHeight(null);
         largura = imagem.getWidth(null);
+
+        setAltura(altura);
+        setLargura(largura);
     }
 
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
 
+    public void setLargura(int largura) {
+        this.largura = largura;
+    }
 
+    public int getAltura() {
+        return altura;
+    }
+
+    public int getLargura() {
+        return largura;
+    }
 }

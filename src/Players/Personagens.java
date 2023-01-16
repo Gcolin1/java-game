@@ -14,6 +14,14 @@ public class Personagens implements ActionListener {
     private Timer timer;
     private int altura, largura;
 
+    public int getAltura() {
+        return altura;
+    }
+
+    public int getLargura() {
+        return largura;
+    }
+
     private boolean isAtaque = false;
 
     public void setX(int x) {
@@ -63,6 +71,17 @@ public class Personagens implements ActionListener {
         imagem = referencia.getImage();
         altura = imagem.getHeight(null);
         largura = imagem.getWidth(null);
+
+        setAltura(altura);
+        setLargura(largura);
+    }
+
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
+
+    public void setLargura(int largura) {
+        this.largura = largura;
     }
 
     public void update(){
@@ -94,6 +113,10 @@ public class Personagens implements ActionListener {
         if (codigo == KeyEvent.VK_LEFT){
             dx = -3;
         }
+    }
+
+    public void parou(){
+        setX(500);
     }
 
     public void keyRelease(KeyEvent tecla){
