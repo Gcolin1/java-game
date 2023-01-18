@@ -90,6 +90,7 @@ public class Personagens implements ActionListener {
         if(colidiu == true){
             System.out.println("Colidiu");
             velocidade = 0;
+            gravidade = 0;
         }else{
             int i = 0;
 
@@ -100,8 +101,6 @@ public class Personagens implements ActionListener {
                 y = y + velocidade;
             }
         }
-
-
 
         setAltura(altura);
         setLargura(largura);
