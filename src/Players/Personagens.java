@@ -8,11 +8,16 @@ import java.awt.event.KeyEvent;
 
 public class Personagens implements ActionListener {
     private int x = 100;
-    private int y = 350;
+    private int y;
+
+    private int velocidade = 0;
+    private int gravidade = 5;
+    private int pulo = 50;
     private int dx, dy;
     private Image imagem;
     private Timer timer;
     private int altura, largura;
+    private boolean colidiu = false;
 
     public int getAltura() {
         return altura;
@@ -66,11 +71,37 @@ public class Personagens implements ActionListener {
         }
     }
 
+
+    public void Colisao(int posicaoChao, int alturaChao) {
+        int personagemY =  y + getAltura();
+        int chaoy = posicaoChao - alturaChao;
+
+        if (personagemY >= chaoy) {
+            colidiu = true;
+        }
+    }
+
     public void load(String caminhoImg){
         ImageIcon referencia = new ImageIcon(caminhoImg);
         imagem = referencia.getImage();
         altura = imagem.getHeight(null);
         largura = imagem.getWidth(null);
+
+        if(colidiu == true){
+            System.out.println("Colidiu");
+            velocidade = 0;
+        }else{
+            int i = 0;
+
+            while(i < 1){
+                i++;
+                velocidade = velocidade + gravidade;
+                System.out.println(velocidade);
+                y = y + velocidade;
+            }
+        }
+
+
 
         setAltura(altura);
         setLargura(largura);
@@ -95,6 +126,13 @@ public class Personagens implements ActionListener {
         imagem = referencia.getImage();
     }
 
+    public void pulo(){
+        System.out.println("pulo");
+        colidiu = false;
+        y = y - pulo;
+        velocidade = pulo;
+    }
+
     public void keyPressed(KeyEvent tecla){
         int codigo = tecla.getKeyCode();
 
@@ -103,7 +141,7 @@ public class Personagens implements ActionListener {
         }
 
         if (codigo == KeyEvent.VK_SPACE){
-            dy = -5;
+            pulo();
         }
 
         if (codigo == KeyEvent.VK_RIGHT){
@@ -113,10 +151,6 @@ public class Personagens implements ActionListener {
         if (codigo == KeyEvent.VK_LEFT){
             dx = -3;
         }
-    }
-
-    public void parou(){
-        setX(500);
     }
 
     public void keyRelease(KeyEvent tecla){
