@@ -12,7 +12,7 @@ public class Personagens implements ActionListener {
 
     private int velocidade = 0;
     private int gravidade = 5;
-    private int pulo = 50;
+    private int pulo = 80;
     private int dx, dy;
     private Image imagem;
     private Timer timer;
@@ -28,6 +28,8 @@ public class Personagens implements ActionListener {
     }
 
     private boolean isAtaque = false;
+    private boolean isPulo = false;
+
 
     public void setX(int x) {
         this.x = x;
@@ -67,6 +69,15 @@ public class Personagens implements ActionListener {
         }
 
         if (isAtaque == false){
+            load("assets\\personagem.png");
+        }
+
+        if(isPulo == true){
+            pulo();
+            isPulo = false;
+        }
+
+        if (isPulo == false){
             load("assets\\personagem.png");
         }
     }
@@ -126,8 +137,10 @@ public class Personagens implements ActionListener {
     }
 
     public void pulo(){
-        System.out.println("pulo");
         colidiu = false;
+        isPulo = true;
+        ImageIcon referencia = new ImageIcon("assets\\personagemPulando.png");
+        imagem = referencia.getImage();
         y = y - pulo;
         velocidade = pulo;
     }
